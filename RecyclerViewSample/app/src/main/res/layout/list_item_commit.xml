@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="commit"
+            type="com.cocoslime.recyclerviewsample.GitCommit" />
+
+        <variable
+            name="clickListener"
+            type="com.cocoslime.recyclerviewsample.CommitClickListener" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            style="@style/CommitListItemLayout">
+
+            <TextView
+                android:id="@+id/hash_text"
+                style="@style/CommitHash"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+
+                app:commitHash="@{commit}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/message_title"
+                tools:text="123CAF" />
+
+            <TextView
+                android:id="@+id/message_title"
+                style="@style/CommitTitle"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+
+                app:commitTitle="@{commit}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Wednesday" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:layout_marginStart="8dp"
+                android:textSize="@dimen/three_dot_size"
+                android:text="@string/three_dot"
+                android:background="@drawable/commit_hash_border"
+                android:visibility="@{commit.subMessage == null? View.GONE : View.VISIBLE}"
+                app:layout_constraintTop_toTopOf="@+id/message_title"
+                app:layout_constraintStart_toEndOf="@+id/message_title"
+                android:onClick="@{() -> clickListener.onClick(commit)}"
+                />
+
+            <TextView
+                android:id="@+id/sub_message"
+                style="@style/CommitSubMessage"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="@{commit.showSubMessage? View.VISIBLE : View.GONE}"
+                app:commitSubMessage="@{commit}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message_title"
+                tools:text="Very long sub message Very long sub message Very long sub message Very long sub message and \n new line" />
+
+            <TextView
+                android:id="@+id/author_timestamp"
+                style="@style/CommitAuthor"
+
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+
+                app:commitAuthorTimeStamp="@{commit}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/hash_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sub_message"
+                tools:text="Dongmin Kim committed 3 days ago" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

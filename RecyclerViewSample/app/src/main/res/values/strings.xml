@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RecyclerViewSample</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="sortAuthor">Author 정렬</string>
+    <string name="sortTime">Time 정렬</string>
+    <string name="three_dot">...</string>
+</resources>
